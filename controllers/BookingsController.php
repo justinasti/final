@@ -2,7 +2,9 @@
 
 namespace app\controllers;
 
-class BookingController extends \yii\web\Controller
+use app\models\Bookings;
+
+class BookingsController extends \yii\web\Controller
 {
     public function actionCreate()
     {
@@ -16,7 +18,9 @@ class BookingController extends \yii\web\Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $bookings = Bookings::find()->orderBy('id')->all();
+
+        return $this->render('index', compact('bookings'));
     }
 
     public function actionUpdate()

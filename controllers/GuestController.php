@@ -17,9 +17,11 @@ class GuestController extends \yii\web\Controller
         return $this->render('create', compact('guest'));
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
-        return $this->render('delete');
+        Guest::findOne($id)->delete();
+
+        return $this->redirect(['guest/index']);
     }
 
     public function actionIndex()
