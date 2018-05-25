@@ -3,10 +3,38 @@
 namespace app\controllers;
 
 use Yii;
+use yii\helpers\VerbFilter;
+use yii\helpers\AccessControl;
 use app\models\Room;
 
 class RoomController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return[
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'only' => ['create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        'actions' => ['create, update, delete'],
+                        'allow' => true,
+                        'roles' => [User::ROLE_ADMIN]
+                    ]
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
     public function actionCreate()
     {
         $model = new Room();

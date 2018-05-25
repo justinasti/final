@@ -3,10 +3,47 @@
 namespace app\controllers;
 
 use Yii;
+use yii\filters\VerbFilter;
 use app\models\Guest;
+use yii\filters\AccessControl;
+use app\components\AccessRule;
+use app\models\User;
 
 class GuestController extends \yii\web\Controller
 {
+    public function behaviors()
+    {
+        return[
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'only' => ['create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        [
+                        'actions' => ['create', 'update'],
+                        'allow' => true,
+                        'roles' => ['@']
+                    ],
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => [User::ROLE_ADMIN]
+                    ]
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                ],
+            ],
+        ];
+    }
+
     public function actionCreate()
     {
         $guest = new Guest();

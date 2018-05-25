@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\models\Guest;
+
 
 /**
  * This is the model class for table "bookings".
@@ -68,8 +70,5 @@ class Bookings extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRoom()
-    {
-        return $this->hasOne(Room::className(), ['id' => 'room_id']);
-    }
+    
 }
