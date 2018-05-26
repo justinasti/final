@@ -13,23 +13,21 @@ class GuestController extends \yii\web\Controller
 {
     public function behaviors()
     {
-        return[
+        return [
             'access' => [
                 'class' => AccessControl::className(),
                 'ruleConfig' => [
                     'class' => AccessRule::className(),
                 ],
-                'only' => ['create', 'update', 'delete'],
-                'rules' => [
+                'only' => ['index','create','update','delete'],
+                'rules'=>[
                     [
-                        [
-                        'actions' => ['create', 'update'],
+                        'actions'=>['index','create','update'],
                         'allow' => true,
                         'roles' => ['@']
                     ],
-                    ],
                     [
-                        'actions' => ['delete'],
+                        'actions' => ['index','delete'],
                         'allow' => true,
                         'roles' => [User::ROLE_ADMIN]
                     ]

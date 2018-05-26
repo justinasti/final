@@ -32,7 +32,7 @@ class Room extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id','price_per_night', 'floor', 'max_persons'], 'required'],
+            [['price_per_night', 'floor', 'max_persons'], 'required'],
             [['price_per_night'], 'number'],
             [['floor'], 'integer'],
             [['max_persons', 'has_baby_bed', 'has_shower', 'has_bath', 'has_seeview'], 'string']

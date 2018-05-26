@@ -12,7 +12,6 @@ $this->title = "Update Room";
 	<?= $form->errorSummary($room); ?>
 </div>
 
-<?= $form->field($room, 'id')->textInput(); ?>
 
 <?= $form->field($room, 'price_per_night')->textInput(); ?>
 

@@ -4,26 +4,33 @@ namespace app\controllers;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VerbFilter;
-use yii\helpers\AccessControl;
+use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use app\models\Bookings;
+use app\components\AccessRule;
 use app\models\Guest;
 use app\models\Room;
+use app\models\User;
 
 class BookingsController extends \yii\web\Controller
 {
     public function behaviors()
     {
-        return[
+        return [
             'access' => [
                 'class' => AccessControl::className(),
                 'ruleConfig' => [
                     'class' => AccessRule::className(),
                 ],
-                'only' => ['create', 'update', 'delete'],
-                'rules' => [
+                'only' => ['index','create','update','delete'],
+                'rules'=>[
                     [
-                        'actions' => ['create, update, delete'],
+                        'actions'=>['index','create','update'],
+                        'allow' => true,
+                        'roles' => ['@']
+                    ],
+                    [
+                        'actions' => ['index','delete'],
                         'allow' => true,
                         'roles' => [User::ROLE_ADMIN]
                     ]

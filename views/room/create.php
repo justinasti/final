@@ -12,8 +12,6 @@ $this->title = "Create Room";
 	<?= $form->errorSummary($model); ?>
 </div>
 
-<?= $form->field($model, 'id')->textInput(); ?>
-
 <?= $form->field($model, 'price_per_night')->textInput(); ?>
 
 <?= $form->field($model, 'floor')->textInput(); ?>
